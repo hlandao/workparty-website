@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600" rel="stylesheet">
+    <title> Workparty </title>
+    <style>
+        body {
+            font-family: 'Josefin Sans', sans-serif;
+        }
+
+        .container {
+        }
+
+        #join-btn {
+            outline: none;
+            display: inline-block;
+            border: 0;
+            height: 40px;
+            padding: 10px 20px;
+            border-radius: 2px;
+            font-size: 17px;
+            color: white;
+            background: rgb(64,97,255);
+            width:100%;        }
+
+        #join-btn:active {
+            background: rgb(76, 137, 255);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div id="logo" style="margin: 100px auto 0px; text-align: center">
+        <img src="./img/logo-website-top-left.png" style="height:60px" />
+    </div>
+    <div id="avatars" style="width:394px; margin: 100px auto 0px;">
+        <img src="./img/avatars/avatar1.png" style="width:40px;height:40px;margin-left: 20px"/>
+        <img src="./img/avatars/avatar2.png" style="width:40px;height:40px;margin-left: 20px"/>
+        <img src="./img/avatars/avatar3.png" style="width:40px;height:40px;margin-left: 20px"/>
+        <img src="./img/avatars/avatar4.png" style="width:40px;height:40px;margin-left: 20px"/>
+        <img src="./img/avatars/avatar5.png" style="width:40px;height:40px;margin-left: 20px"/>
+        <img src="./img/avatars/avatar6.png" style="width:40px;height:40px;margin-left: 20px"/>
+    </div>
+    <div style="margin: 20px auto 0;text-align: center; font-size: 28px;">
+        work with your co-workers as if you sit together at the same office
+    </div>
+    <div style="margin-top:15px;text-align: center;color: #D82C65;font-size: 30px;line-height: 1.4;">
+        MAKE WORKING REMOTELY <br>
+        <span style="font-weight: 600;font-size:34px;letter-spacing: 5px;">GREAT AGAIN!</span>
+    </div>
+    <div style="margin-top:100px;">
+        <div id="email-form" style="width:300px;margin:0 auto;">
+            <div style="text-align: center; font-size: 22px; font-weight: 400;color: rgb(64,97,255);">
+                Get Workparty for mac
+            </div>
+            <div style="margin-top: 20px;">
+                <input type="email" placeholder="email" style="outline: none;border: 0;border-bottom: 2px solid rgb(64,97,255);height: 50px;width: 100%;margin-right: 25px;font-size: 17px;"/>
+            </div>
+            <div style="margin-top:25px;">
+                <button type="button" id="join-btn"> Join Beta </button>
+            </div>
+        </div>
+        <div id="success-message" style="display:none;text-align: center;font-size:26px;">
+            <span style="font-weight: 600;font-size:30px;letter-spacing: 5px;">THANKS!</span> <br>
+            <span>We will shortly send you an email with the download link.</span>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src='https://www.google-analytics.com/analytics.js';m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  var GA_LOCAL_STORAGE_KEY = 'ga:clientId';
+
+  ga('create',  'UA-91768892-1', 'auto', {
+    'storage': 'none',
+    'clientId': localStorage.getItem(GA_LOCAL_STORAGE_KEY)
+  });
+  ga('set', 'location', 'http://workparty.herokuapp.com');
+
+  ga(function(tracker) {
+    localStorage.setItem(GA_LOCAL_STORAGE_KEY, tracker.get('clientId'));
+  });
+
+  ga('set', 'checkProtocolTask', null);
+</script>
+</html>
