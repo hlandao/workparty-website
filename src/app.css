@@ -1,0 +1,118 @@
+html {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1px;
+    padding: 0;
+    margin:0;
+    height: 100%;
+    font-size:16px;
+}
+
+@media screen and (min-height : 800px)
+{
+    body
+    {
+        font-size: 20px;
+    }
+}
+
+
+.centered {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#root {
+    height:100%;
+}
+
+#content {
+    height:100%;
+}
+
+#logo {
+    padding-left:40px;
+}
+
+#logo img {
+    height: 25px;
+}
+
+#top-container {
+    height:12%;
+}
+
+#middle-container {
+    height: 68%;
+    background: rgba(243, 243, 243, 0.51);
+    padding: 4% 0;
+}
+
+#screencast-wrapper {
+    text-align: center;
+    height: 77%;
+}
+
+#screencast {
+    height: 100%;
+    box-shadow: 2px 0px 41px 6px rgba(0,0,0,0.22);
+}
+
+#subtitle {
+    width: 600px;
+    margin: 1.5% auto 0;
+    text-align: center;
+    font-size: 1.4em;
+    color: #596082;
+    font-weight: 300;
+}
+
+#bottom-container {
+    height:20%;
+}
+
+
+#email-form {
+    width: 280px;
+    margin: 0 auto;
+}
+
+#email-form input {
+    outline: none;
+    border: 0;
+    height: 38px;
+    width: 100%;
+    color: rgb(64, 97, 255);
+    margin-right:25px;
+    font-size:15px;
+    padding: 0px 12px;
+    background: rgb(245, 245, 245);
+    border-radius: 3px;
+}
+
+#email-form input::-webkit-input-placeholder {
+    color: #c7d0d1;
+}
+
+#join-btn {
+    outline: none;
+    display: inline-block;
+    border: 0;
+    border-radius: 2px;
+    padding: 7px 0px;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+    background: rgb(64, 97, 255);
+    width: 100%;
+}
+
+#join-btn:active {
+    background: rgb(76, 137, 255);
+}

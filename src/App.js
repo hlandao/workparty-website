@@ -1,5 +1,7 @@
 import React from 'react';
-import './loader.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import './loader.css';
+import './app.css';
 
 import {joinBeta} from './apollo';
 
@@ -9,15 +11,21 @@ class App extends React.Component {
 
     this.state = {
       joinedBeta: false,
-      loading: false
+      loading: false,
+      joinedError: false
     }
   }
 
   render() {
     return (
-      <div className="container">
-        {this.renderBaseSite()}
-        {this.renderJoinBeta()}
+      <div id="content">
+        <div id="top-container">
+          <div id="logo" className="centered">
+            <img alt="" src="./img/logo-website-top-left.png" />
+          </div>
+        </div>
+        {this.renderMain()}
+        {this.renderBottom()}
       </div>
     );
   }
@@ -25,49 +33,35 @@ class App extends React.Component {
   joinBeta() {
     const {email} = this.state;
     this.setState({loading: true});
-    joinBeta(email).then(() => {
-      this.setState({joinedBeta: true, loading: false});
-    });
+    joinBeta(email)
+      .then(() => {
+        this.setState({joinedBeta: true, loading: false});
+      })
+      .catch(e => {
+        this.setState({joinedBeta: true, joinedError: true, loading: false});
+        console.error('error register to beta',e);
+      });
   }
 
-  renderBaseSite() {
+  renderMain() {
     return (
-      <div>
-        <div id="logo" style={{margin: '80px auto 0px', textAlign: 'center'}}>
-          <img alt="" src="./img/logo-website-top-left.png" style={{height: '60px'}}/>
+      <div id="middle-container">
+        <div id="screencast-wrapper">
+          <img src="./img/screencast.gif" id="screencast" className="centered"/>
         </div>
-        <div id="avatars" style={{width: '394px', margin: '70px auto 0px'}}>
-          <img alt="" src="./img/avatars/avatar1.png" className="avatar"/>
-          <img alt="" src="./img/avatars/avatar2.png" className="avatar"/>
-          <img alt="" src="./img/avatars/avatar3.png" className="avatar"/>
-          <img alt="" src="./img/avatars/avatar4.png" className="avatar"/>
-          <img alt="" src="./img/avatars/avatar5.png" className="avatar"/>
-          <img alt="" src="./img/avatars/avatar6.png" className="avatar"/>
-        </div>
-        <div style={{margin: '20px auto 0', textAlign: 'center', fontSize: '28px'}}>
-          work with your co-workers as if you sit together at the same office
-        </div>
-        <div style={{
-          marginTop: '15px',
-          'textAlign': 'center',
-          color: '#D82C65',
-          'fontSize': '30px',
-          'lineHeight': 1.4
-        }}>
-          MAKE WORKING REMOTELY <br />
-          <span style={{'fontWeight': 600, 'fontSize': '34px', 'letterSpacing': '5px'}}> GREAT AGAIN!
-          </span>
+        <div id="subtitle">
+          work with your co-workers <br/> as if you sit together at the same office
         </div>
       </div>
     )
   }
 
-  renderJoinBeta() {
-    const {joinedBeta} = this.state;
+  renderBottom() {
+    const {joinedBeta, joinedError} = this.state;
     return (
-      <div style={{'marginTop': '70px'}}>
+      <div id="bottom-container">
         {
-          joinedBeta ? this.renderJoinedSuccess() : this.renderEnterEmail()
+          joinedBeta ? (joinedError ? this.renderJoinedError() : this.renderJoinedSuccess()) : this.renderEnterEmail()
         }
       </div>
     );
@@ -83,23 +77,11 @@ class App extends React.Component {
     }
 
     return (
-      <div id="email-form" style={{width: '300px', margin: '0 auto'}}>
-        <div style={{'textAlign': 'center', 'fontSize': '22px', 'fontWeight': '400', 'color': 'rgb(64,97,255)'}}>
-          Get Workparty for mac
+      <div id="email-form" className="centered">
+        <div>
+          <input type="email" placeholder="email..." onChange={e => this.setState({email: e.target.value})}/>
         </div>
-        <div style={{'marginTop': '20px'}}>
-          <input type="email" placeholder="email"
-                 style={{
-                   outline: 'none',
-                   border: 0,
-                   'borderBottom': '2px solid rgb(64,97,255)',
-                   height: '50px',
-                   width: '100%',
-                   'marginRight': '25px',
-                   'fontSize': '17px'
-                 }} onChange={e => this.setState({email: e.target.value})}/>
-        </div>
-        <div style={{'marginTop': '25px'}}>
+        <div style={{'marginTop': '15px'}}>
           <button type="button" id="join-btn" onClick={this.joinBeta.bind(this)}> Join Beta</button>
         </div>
       </div>
@@ -108,9 +90,18 @@ class App extends React.Component {
 
   renderJoinedSuccess() {
     return (
-      <div id="success-message" style={{'textAlign': 'center', 'fontSize': '26px'}}>
-        <span style={{'fontWeight': 600, 'fontSize': '30px', 'letterSpacing': '5px'}}>THANKS!</span> <br />
-        <span>We will shortly send you an email with the download link.</span>
+      <div id="success-message" className="centered" style={{'textAlign': 'center'}}>
+        <span style={{'fontWeight': 600, 'fontSize': '1.25em', 'letterSpacing': '5px'}}>THANKS!</span> <br />
+        <span style={{'fontSize': '0.9em'}}>We will shortly send you an email with the download link.</span>
+      </div>
+    );
+  }
+
+  renderJoinedError() {
+    return (
+      <div id="success-message" className="centered" style={{'textAlign': 'center'}}>
+        <span style={{'fontWeight': 600, 'fontSize': '1.25em', 'letterSpacing': '5px'}}>SORRY!</span> <br />
+        <span style={{'fontSize': '0.9em'}}>We got an error. Please send an email to hlandao@gmail.com.</span>
       </div>
     );
   }
