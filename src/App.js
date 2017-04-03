@@ -1,4 +1,6 @@
 import React from 'react';
+import MobileDetect from 'mobile-detect';
+
 import 'bootstrap/dist/css/bootstrap.css';
 import './loader.css';
 import './app.css';
@@ -8,6 +10,9 @@ import {joinBeta} from './apollo';
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.mobileDetect = new MobileDetect(window.navigator.userAgent);
+    this.isMobile = !!this.mobileDetect.mobile()
 
     this.state = {
       joinedBeta: false,
@@ -60,18 +65,22 @@ class App extends React.Component {
 
   renderBottom() {
     const {joinedBeta, joinedError} = this.state;
-    return (
-      <div id="bottom-container" className="container-fluid">
-        {this.renderDownloadDesktop()}
-      </div>
-    )
-    // return (
-    //   <div id="bottom-container">
-    //     {
-    //       joinedBeta ? (joinedError ? this.renderJoinedError() : this.renderJoinedSuccess()) : this.renderEnterEmail()
-    //     }
-    //   </div>
-    // );
+
+    if(this.isMobile) {
+      return (
+        <div id="bottom-container" className="container-fluid">
+          {
+            joinedBeta ? (joinedError ? this.renderJoinedError() : this.renderJoinedSuccess()) : this.renderEnterEmail()
+          }
+        </div>
+      );
+    } else {
+      return (
+        <div id="bottom-container" className="container-fluid">
+          {this.renderDownloadDesktop()}
+        </div>
+      )
+    }
   }
 
   renderDownloadDesktop() {
@@ -115,7 +124,8 @@ class App extends React.Component {
     }
 
     return (
-      <div id="email-form" className="centered">
+    <div className="row">
+      <div id="email-form" className="col-md-4 col-lg-offset-4">
         <div>
           <input type="email" placeholder="email..." onChange={e => this.setState({email: e.target.value})}/>
         </div>
@@ -123,6 +133,7 @@ class App extends React.Component {
           <button type="button" id="join-btn" onClick={this.joinBeta.bind(this)}> Join Beta</button>
         </div>
       </div>
+    </div>
     )
   }
 
