@@ -50,7 +50,7 @@ class App extends React.Component {
           <img src="./img/screencast.gif" id="screencast" className="centered"/>
         </div>
         <div id="subtitle">
-          work with your co-workers <br/> as if you sit together at the same office
+          work <strong>remotely</strong> with your co-workers as if you sit together at the same <strong>room</strong>
         </div>
       </div>
     )
