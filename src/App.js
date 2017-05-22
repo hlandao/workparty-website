@@ -58,6 +58,9 @@ class App extends React.Component {
         <div id="subtitle">
           work <strong>remotely</strong> with your co-workers as if you sit together at the same <strong>room</strong>
         </div>
+        <div style={{textAlign: 'center', color: '#a1a2a3', marginTop: 5, fontWeight: 'lighter', fontSize: '17px'}}>
+          Always on screen sharing and audio calls for teams!
+        </div>
       </div>
     )
   }
@@ -88,17 +91,16 @@ class App extends React.Component {
     return (
       <div className="row download-wrapper">
         <div className="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-3 btn-wrapper">
-          <button className="btn" onClick={() => this.download()}>
+          <button className="btn" onClick={() => this.downloadMac()}>
             <i className="fa fa-apple centered" aria-hidden="true"></i>
             Download for Mac
           </button>
         </div>
         <div className="col-xs-12 col-sm-4 col-md-3 btn-wrapper">
-          <button className="btn" onClick={() => alert('coming soon...')}>
+          <button className="btn" onClick={() => this.downloadWindows()}>
             <i className="fa fa-windows centered" aria-hidden="true"></i>
             Download for Win
           </button>
-          <div className="soon">coming soon...</div>
         </div>
         {clickedDownload ? this.renderInviteCode() : null}
       </div>
@@ -155,8 +157,15 @@ class App extends React.Component {
     );
   }
 
-  download() {
-    window.location.assign('http://workparty-downloads.s3.amazonaws.com/workparty0.1.0.zip');
+  downloadMac() {
+    window.location.assign('http://workparty-downloads.s3.amazonaws.com/workparty-0-1-2.zip');
+    if(!this.state.clickedDownload) {
+      this.setState({clickedDownload: true, inviteCode: this.genInviteCode()});
+    }
+  }
+
+  downloadWindows() {
+    window.location.assign('http://workparty-downloads.s3.amazonaws.com/workparty-windows-0.1.2.zip');
     if(!this.state.clickedDownload) {
       this.setState({clickedDownload: true, inviteCode: this.genInviteCode()});
     }
